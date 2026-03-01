@@ -13,7 +13,7 @@ SELECT *
   FROM [kzn_policestation].[dbo].south_africa_criminal_database
   GROUP BY Province
 
-  -- 4. Crime type = fraud
+  -- 4. Crime type = fraud (The answer is 113)
   SELECT *
   FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
   WHERE [CrimeType] = 'Fraud'
