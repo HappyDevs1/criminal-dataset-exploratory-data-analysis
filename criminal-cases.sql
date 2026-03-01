@@ -1,51 +1,36 @@
-SELECT TOP (1000) [RecordID]
-      ,[FirstName]
-      ,[LastName]
-      ,[FullName]
-      ,[Age]
-      ,[Gender]
-      ,[Country]
-      ,[Province]
-      ,[SouthAfricanID]
-      ,[CaseNumber]
-      ,[CrimeType]
-      ,[FinancialScore]
-      ,[EstimatedFraudAmount_ZAR]
-      ,[RiskLevel]
-      ,[CaseStatus]
-      ,[BankInvolved]
-      ,[PreviousOffenses]
-      ,[Arrested]
-      ,[CrimeDate]
-      ,[CourtDate]
-      ,[InvestigatingOfficer]
-      ,[StationCode]
+-- 1. Display all records
+SELECT *
+ FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+
+  -- DROP TABLE [kzn_policestation].[dbo].[south_africa_criminal_database]
+
+  -- 2. Total records
+  SELECT COUNT(*) AS total_records
   FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
 
-  DROP TABLE [kzn_policestation].[dbo].[south_africa_criminal_database]
+  -- 3. Case in province
+  SELECT Province, COUNT(RecordID) as record_per_province
+  FROM [kzn_policestation].[dbo].south_africa_criminal_database
+  GROUP BY Province
 
-  -- Total records
-  SELECT COUNT(*) FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+  -- 4. Crime type = fraud
+  SELECT *
+  FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+  WHERE [CrimeType] = 'Fraud'
 
-  -- Case in province
-  SELECT COUNT(Province) FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
-
-  -- Crime type = fraud
-  SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE [CrimeType] = 'Fraud'
-
-  -- Count the number of causes for each crime
+  -- 5.Count the number of causes for each crime
   SELECT CrimeType, COUNT(*) AS TotalCase FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY CrimeType ORDER BY TotalCases DESC
 
-  -- High and Critical cases
+  -- 6. High and Critical cases
   SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE ([RiskLevel] = 'High') OR ([RiskLevel] = 'Critical')
 
-  -- Average financial score
+  -- 7. Average financial score
 SELECT AVG(FinancialScore) AS AvgFinancialScore FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
 
--- Highest estimated fraud amount
+-- 8. Highest estimated fraud amount
 SELECT MAX(EstimatedFraudAmount_ZAR) AS HighestFraudAmount FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
 
--- Top 10 highest fraud cases
+-- 9. Top 10 highest fraud cases
 SELECT TOP 10 * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] ORDER BY EstimatedFraudAmount_ZAR DESC
 
 -- Suspects that were arrested

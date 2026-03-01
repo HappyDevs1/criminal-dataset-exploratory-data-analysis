@@ -1,0 +1,1 @@
+SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
