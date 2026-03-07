@@ -19,79 +19,132 @@ SELECT *
   WHERE [CrimeType] = 'Fraud'
 
   -- 5.Count the number of causes for each crime
-  SELECT CrimeType, COUNT(*) AS TotalCase FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY CrimeType ORDER BY TotalCases DESC
+  SELECT CrimeType, COUNT(*) AS TotalCase
+  FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+  GROUP BY CrimeType ORDER BY TotalCases DESC
 
   -- 6. High and Critical cases
-  SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE ([RiskLevel] = 'High') OR ([RiskLevel] = 'Critical')
+  SELECT *
+  FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+  WHERE ([RiskLevel] = 'High') OR ([RiskLevel] = 'Critical')
 
   -- 7. Average financial score
-SELECT AVG(FinancialScore) AS AvgFinancialScore FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+SELECT AVG(FinancialScore) AS AvgFinancialScore
+FROM[kzn_policestation].[dbo].[south_africa_criminal_database]
 
 -- 8. Highest estimated fraud amount
-SELECT MAX(EstimatedFraudAmount_ZAR) AS HighestFraudAmount FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+SELECT MAX(EstimatedFraudAmount_ZAR) AS HighestFraudAmount
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
 
 -- 9. Top 10 highest fraud cases
-SELECT TOP 10 * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] ORDER BY EstimatedFraudAmount_ZAR DESC
+SELECT TOP 10 *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+ORDER BY EstimatedFraudAmount_ZAR DESC
 
 -- Suspects that were arrested
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE Arrested = 'Yes'
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE Arrested = 'Yes'
 
 -- Arrested vs not arrested count
-SELECT Arrested, COUNT(*) AS Total FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY Arrested
+SELECT Arrested, COUNT(*) AS Total
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY Arrested
 
 -- Cases per bank involved
-SELECT BankInvolved, COUNT(*) AS TotalCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY BankInvolved ORDER BY TotalCases DESC
+SELECT BankInvolved, COUNT(*) AS TotalCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY BankInvolved
+ORDER BY TotalCases DESC
 
 -- Total fraud amount per province
-SELECT Province, SUM(EstimatedFraudAmount_ZAR) AS TotalFraud FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY Province ORDER BY TotalFraud DESC
+SELECT Province, SUM(EstimatedFraudAmount_ZAR) AS TotalFraud
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database] 
+ROUP BY Province
+ORDER BY TotalFraud DESC
 
 -- Suspects older than 50
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE Age > 50
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE Age > 50
 
 -- Average age per province
-SELECT Province, AVG(Age) AS AvgAge FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY Province
+SELECT Province, AVG(Age) AS AvgAge
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY Province
 
 -- Cases from 2020 onwards
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE CrimeDate >= '2020-01-01'
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE CrimeDate >= '2020-01-01'
 
 -- Convicted cases count
-SELECT COUNT(*) AS ConvictedCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE CaseStatus = 'Convicted'
+SELECT COUNT(*) AS ConvictedCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE CaseStatus = 'Convicted'
 
 -- Suspects with more than 3 previous offenses
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE PreviousOffenses > 3
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE PreviousOffenses > 3
 
 -- Distribution by risk level
-SELECT RiskLevel, COUNT(*) AS TotalCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY RiskLevel ORDER BY TotalCases DESC
+SELECT RiskLevel, COUNT(*) AS TotalCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY RiskLevel ORDER BY TotalCases DESC
 
 -- Total fraud amount overall
-SELECT SUM(EstimatedFraudAmount_ZAR) AS TotalFraudAmount FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+SELECT SUM(EstimatedFraudAmount_ZAR) AS TotalFraudAmount
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
 
 -- Province with highest number of cases
-SELECT TOP 1 Province, COUNT(*) AS TotalCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY Province ORDER BY TotalCases DESC
+SELECT TOP 1 Province, COUNT(*) AS TotalCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY Province ORDER BY TotalCases DESC
 
 -- Youngest suspect
-SELECT TOP 1 * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] ORDER BY Age ASC
+SELECT TOP 1 *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+ORDER BY Age ASC
 
 -- Oldest suspect
-SELECT TOP 1 * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] ORDER BY Age DESC
+SELECT TOP 1 *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+ORDER BY Age DESC
 
 -- Cases handled by each investigating officer
-SELECT InvestigatingOfficer, COUNT(*) AS TotalCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY InvestigatingOfficer ORDER BY TotalCases DESC
+SELECT InvestigatingOfficer, COUNT(*) AS TotalCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY InvestigatingOfficer
+ORDER BY TotalCases DESC
 
 -- Average fraud amount per crime type
-SELECT CrimeType, AVG(EstimatedFraudAmount_ZAR) AS AvgFraudAmount FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY CrimeType
+SELECT CrimeType, AVG(EstimatedFraudAmount_ZAR) AS AvgFraudAmount
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY CrimeType
 
 -- Cases in Gauteng
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE Province = 'Gauteng'
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE Province = 'Gauteng'
 
 -- Fraud cases that are high risk
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE CrimeType = 'Fraud' AND RiskLevel = 'High'
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE CrimeType = 'Fraud' AND RiskLevel = 'High'
 
 -- Cases per year
-SELECT YEAR(CrimeDate) AS CrimeYear, COUNT(*) AS TotalCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY YEAR(CrimeDate) ORDER BY CrimeYear
+SELECT YEAR(CrimeDate) AS CrimeYear, COUNT(*) AS TotalCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY YEAR(CrimeDate) ORDER BY CrimeYear
 
 -- Financial score below 500
-SELECT * FROM [kzn_policestation].[dbo].[south_africa_criminal_database] WHERE FinancialScore < 500
+SELECT *
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+WHERE FinancialScore < 500
 
 -- Most common crime type
-SELECT TOP 1 CrimeType, COUNT(*) AS TotalCases FROM [kzn_policestation].[dbo].[south_africa_criminal_database] GROUP BY CrimeType ORDER BY TotalCases DESC
+SELECT TOP 1 CrimeType, COUNT(*) AS TotalCases
+FROM [kzn_policestation].[dbo].[south_africa_criminal_database]
+GROUP BY CrimeType
+ORDER BY TotalCases DESC
